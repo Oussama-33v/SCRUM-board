@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouCode SCRUM Board</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -47,7 +49,21 @@
 
         <div class="sprint-backlog">
             <h2>📋 Sprint Backlog</h2>
-            <div id="sprintBacklog"></div>
+            <div id="sprintBacklog">
+                <div class="sprint-container">
+                    <div class="sprint-header">
+                        <h3>Sprint 2</h3>
+                        <button class="start-sprint-btn" onclick="startSprint(2)">Démarrer Sprint</button>
+                    </div>
+                    <div class="sprint-stories">
+                        <div class="story-item">
+                            <strong>trdfyguio</strong>
+                            <p>tygujio</p>
+                            <small>Assigné à : said</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="scrum-board">
@@ -75,4 +91,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

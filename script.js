@@ -3,6 +3,17 @@ let userStories = [];
 let boardStories = [];
 let storyIdCounter = 1;
 
+
+let assignedStory = document.getElementById('storyAssignee');
+let sprintAssignedName = document.querySelectorAll('#storyAssignee option')
+let collaboratorsNamesLlist = document.getElementById('collaboratorsList');
+let collaboratorInput = document.getElementById('collaboratorName');
+let titleStory = document.getElementById('storyTitle');
+let storyDescription = document.getElementById('storyDescription');
+let count = 0;
+
+// ===================================================================
+
 /**
  * Fonction pour ajouter un nouveau collaborateur à l'équipe
  * TODO: 
@@ -13,8 +24,21 @@ let storyIdCounter = 1;
  * - Appeler updateCollaboratorsList() pour afficher la liste
  * - Appeler updateAssigneeSelect() pour mettre à jour le select d'assignation
  */
+
+
+
+
 function addCollaborator() {
-    // À IMPLÉMENTER
+    let trimedCollaboratorVlue = collaboratorInput.value.trim()
+
+    if (collaborators.includes(collaboratorInput.value) || trimedCollaboratorVlue == '') {
+        collaboratorInput.value = '';
+        return;
+    }
+    collaborators.push(collaboratorInput.value);
+    collaboratorInput.value = '';
+    updateCollaboratorsList(collaborators);
+    updateAssigneeSelect(collaborators);
 }
 
 /**
@@ -25,8 +49,11 @@ function addCollaborator() {
  * - Utiliser un style inline: background #667eea, color white, padding 8px 15px, border-radius 20px
  * - Injecter le HTML dans l'élément avec innerHTML
  */
-function updateCollaboratorsList() {
+function updateCollaboratorsList(collaborators) {
     // À IMPLÉMENTER
+    collaboratorsNamesLlist.innerHTML += `
+        <p style = "color : black">${collaborators[collaborators.length - 1]}</p>
+    `
 }
 
 /**
@@ -36,9 +63,17 @@ function updateCollaboratorsList() {
  * - Générer les options: une option "Non assigné" + une option par collaborateur
  * - Mettre à jour le select avec innerHTML
  */
-function updateAssigneeSelect() {
+let optionValue = 0
+function updateAssigneeSelect(collaborators) {
     // À IMPLÉMENTER
+    // assignedStory.innerHTML += `<option style = "color : black" value =${optionValue++} >${collaborators[collaborators.length - 1]}</option>`
+
+    assignedStory.innerHTML = `<option value="">Non assigné</option>`;
+    collaborators.forEach(element => {
+        assignedStory.innerHTML += `<option style = "color : black" value = ${optionValue++}>${element}</option>`
+    });
 }
+console.log(titleStory.value);
 
 /**
  * Fonction pour créer une nouvelle User Story
@@ -52,6 +87,13 @@ function updateAssigneeSelect() {
  */
 function addUserStory() {
     // À IMPLÉMENTER
+    let sprint = {
+        id: count += 1,
+        title: titleStory.value,
+        description: storyDescription.value,
+        assigned: sprintAssignedName.value
+    }
+
 }
 
 /**
