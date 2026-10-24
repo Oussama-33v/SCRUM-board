@@ -58,7 +58,7 @@ function updateCollaboratorsList(collaborators) {
         <p style = "color : black">${nameAded}</p>
     `
     })
-}   
+}
 
 /**
  * Fonction pour mettre à jour la liste déroulante des assignés
@@ -76,7 +76,7 @@ function updateAssigneeSelect(collaborators) {
         valueCounter++;
     });
 }
-console.log(titleStory.textContent);
+console.log(titleStory.value);
 
 /**
  * Fonction pour créer une nouvelle User Story
@@ -88,14 +88,23 @@ console.log(titleStory.textContent);
  * - Vider les champs titre et description
  * - Appeler renderSprintBacklog() pour actualiser l'affichage
  */
+function verifyStoryTitle(input) {
+    input.innerHTML = '';
+    let withSpaces = input.value.trim()
+    if (withSpaces = '') {
+        input.innerHTML = '';
+        return;
+    }
+    return input.value;
+}
+
+
+
 function addUserStory() {
     // À IMPLÉMENTER
-    titleStory.innerHTML = "";
-    storyDescription.innerHTML = '';
-
     let sprint = {
         id: count,
-        title: titleStory.value,
+        title: verifyStoryTitle(titleStory),
         description: storyDescription.value,
         sprintNumber: storySprint.value,
         assigned: sprintAssignedName.textContent
@@ -103,7 +112,7 @@ function addUserStory() {
     userStories.push(sprint)
     count++;
     console.log(userStories);
-    
+
 }
 
 /**
