@@ -98,6 +98,16 @@ function verifyStoryTitle(input) {
     return input.value;
 }
 
+function verifyStoryDescription(input) {
+    input.innerHTML = '';
+    let withSpaces = input.value.trim()
+    if (withSpaces = '') {
+        input.innerHTML = '';
+        return;
+    }
+    return input.value;
+}
+
 
 
 function addUserStory() {
@@ -105,7 +115,7 @@ function addUserStory() {
     let sprint = {
         id: count,
         title: verifyStoryTitle(titleStory),
-        description: storyDescription.value,
+        description: verifyStoryDescription(storyDescription),
         sprintNumber: storySprint.value,
         assigned: sprintAssignedName.textContent
     }
