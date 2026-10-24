@@ -73,8 +73,8 @@ function updateAssigneeSelect(collaborators) {
     assignedStory.innerHTML = `<option value="">Non assigné</option>`;
     collaborators.forEach(element => {
         assignedStory.innerHTML += `<option style = "color : black" value = ${valueCounter}>${element}</option>`
-        valueCounter++;
     });
+    valueCounter++;
 }
 console.log(titleStory.value);
 
@@ -91,7 +91,7 @@ console.log(titleStory.value);
 function verifyStoryTitle(input) {
     input.innerHTML = '';
     let withSpaces = input.value.trim()
-    if (withSpaces = '') {
+    if (withSpaces == '') {
         input.innerHTML = '';
         return;
     }
@@ -101,7 +101,7 @@ function verifyStoryTitle(input) {
 function verifyStoryDescription(input) {
     input.innerHTML = '';
     let withSpaces = input.value.trim()
-    if (withSpaces = '') {
+    if (withSpaces == '') {
         input.innerHTML = '';
         return;
     }
@@ -111,18 +111,26 @@ function verifyStoryDescription(input) {
 
 
 function addUserStory() {
-    // À IMPLÉMENTER
-    let sprint = {
+
+    const sprint = {
         id: count,
         title: verifyStoryTitle(titleStory),
         description: verifyStoryDescription(storyDescription),
         sprintNumber: storySprint.value,
-        assigned: sprintAssignedName.textContent
+        assigned: assignedStory.value
     }
+    let values = Object.values(sprint)
+    console.log(sprint.assigned);
+    values.forEach(value => {
+        if (value == undefined) {
+            storyDescription.innerHTML = '';
+            titleStory.innerHTML = '';
+            return;
+        }
+    })
     userStories.push(sprint)
     count++;
     console.log(userStories);
-
 }
 
 /**
