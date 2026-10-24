@@ -5,12 +5,13 @@ let storyIdCounter = 1;
 
 
 let assignedStory = document.getElementById('storyAssignee');
-let sprintAssignedName = document.querySelectorAll('#storyAssignee option')
+let sprintAssignedName = document.querySelectorAll('#storyAssignee option');
 let collaboratorsNamesLlist = document.getElementById('collaboratorsList');
 let collaboratorInput = document.getElementById('collaboratorName');
 let titleStory = document.getElementById('storyTitle');
 let storyDescription = document.getElementById('storyDescription');
-let count = 0;
+let storySprint = document.getElementById("storySprint")
+let count = 1;
 
 // ===================================================================
 
@@ -50,11 +51,14 @@ function addCollaborator() {
  * - Injecter le HTML dans l'élément avec innerHTML
  */
 function updateCollaboratorsList(collaborators) {
-    // À IMPLÉMENTER
-    collaboratorsNamesLlist.innerHTML += `
-        <p style = "color : black">${collaborators[collaborators.length - 1]}</p>
+
+    collaboratorsNamesLlist.innerHTML = '';
+    collaborators.forEach(nameAded => {
+        collaboratorsNamesLlist.innerHTML += `
+        <p style = "color : black">${nameAded}</p>
     `
-}
+    })
+}   
 
 /**
  * Fonction pour mettre à jour la liste déroulante des assignés
@@ -63,17 +67,16 @@ function updateCollaboratorsList(collaborators) {
  * - Générer les options: une option "Non assigné" + une option par collaborateur
  * - Mettre à jour le select avec innerHTML
  */
-let optionValue = 0
+let valueCounter = 1;
 function updateAssigneeSelect(collaborators) {
-    // À IMPLÉMENTER
-    // assignedStory.innerHTML += `<option style = "color : black" value =${optionValue++} >${collaborators[collaborators.length - 1]}</option>`
 
     assignedStory.innerHTML = `<option value="">Non assigné</option>`;
     collaborators.forEach(element => {
-        assignedStory.innerHTML += `<option style = "color : black" value = ${optionValue++}>${element}</option>`
+        assignedStory.innerHTML += `<option style = "color : black" value = ${valueCounter}>${element}</option>`
+        valueCounter++;
     });
 }
-console.log(titleStory.value);
+console.log(titleStory.textContent);
 
 /**
  * Fonction pour créer une nouvelle User Story
@@ -87,13 +90,20 @@ console.log(titleStory.value);
  */
 function addUserStory() {
     // À IMPLÉMENTER
+    titleStory.innerHTML = "";
+    storyDescription.innerHTML = '';
+
     let sprint = {
-        id: count += 1,
+        id: count,
         title: titleStory.value,
         description: storyDescription.value,
-        assigned: sprintAssignedName.value
+        sprintNumber: storySprint.value,
+        assigned: sprintAssignedName.textContent
     }
-
+    userStories.push(sprint)
+    count++;
+    console.log(userStories);
+    
 }
 
 /**
