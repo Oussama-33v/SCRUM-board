@@ -122,8 +122,12 @@ function addUserStory() {
         description: description,
         sprintNumber: storySprint.value,
         assigned: assignedStory.value,
+        status: 'backlog'
     }
-    console.log(sprint.assigned);
+    let values = Object.values(sprint);
+    if(values.includes(undefined)){
+        return;
+    }
     userStories.push(sprint)
     count++;
     titleStory.value = '';
@@ -148,7 +152,7 @@ function addUserStory() {
 function renderSprintBacklog(userStories) {
     const sprintBacklog = document.getElementById('sprintBacklog');
     userStories.forEach(story => {
-
+        if (story.status == 'backlog') {
             sprintBacklog.innerHTML = `
                 <div class="sprint-container">
                     <div class="sprint-header">
@@ -163,7 +167,7 @@ function renderSprintBacklog(userStories) {
                         </div>
                     </div>
                 </div>`
-
+        }
     })
 }
 
