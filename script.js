@@ -72,13 +72,13 @@ function updateAssigneeSelect(collaborators) {
 
     assignedStory.innerHTML = `<option value="">Non assigné</option>`;
     collaborators.forEach(element => {
-        assignedStory.innerHTML += `<option style = "color : black" value = ${valueCounter}>${element}</option>`
+        assignedStory.innerHTML += `<option style = "color : black" value = ${element}>${element}</option>`
     });
     valueCounter++;
 }
 console.log(titleStory.value);
 
-/**
+/** 
  * Fonction pour créer une nouvelle User Story
  * TODO:
  * - Récupérer les valeurs des champs: storyTitle, storyDescription, storySprint, storyAssignee
@@ -89,48 +89,49 @@ console.log(titleStory.value);
  * - Appeler renderSprintBacklog() pour actualiser l'affichage
  */
 function verifyStoryTitle(input) {
-    input.innerHTML = '';
-    let withSpaces = input.value.trim()
-    if (withSpaces == '') {
-        input.innerHTML = '';
-        return;
+    let trimedValue = input.value.trim()
+    if (trimedValue === '') {
+        input.value = '';
+        return undefined;
     }
-    return input.value;
+    return trimedValue;
 }
 
 function verifyStoryDescription(input) {
-    input.innerHTML = '';
-    let withSpaces = input.value.trim()
-    if (withSpaces == '') {
-        input.innerHTML = '';
-        return;
+    let trimedValue = input.value.trim()
+    if (trimedValue === '') {
+        input.value = '';
+        return undefined;
     }
-    return input.value;
+    return trimedValue;
 }
 
-
-
 function addUserStory() {
+    const title = verifyStoryTitle(titleStory)
+    const description = verifyStoryDescription(storyDescription)
 
-    const sprint = {
-        id: count,
-        title: verifyStoryTitle(titleStory),
-        description: verifyStoryDescription(storyDescription),
-        sprintNumber: storySprint.value,
-        assigned: assignedStory.value
+    if (!title || !description || !assignedStory) {
+        titleStory.value = '';
+        storyDescription.value = '';
+        assignedStory.value = '';
+        return;
     }
-    let values = Object.values(sprint)
+    let sprint = {
+        id: count,
+        title: title,
+        description: description,
+        sprintNumber: storySprint.value,
+        assigned: assignedStory.value,
+    }
     console.log(sprint.assigned);
-    values.forEach(value => {
-        if (value == undefined) {
-            storyDescription.innerHTML = '';
-            titleStory.innerHTML = '';
-            return;
-        }
-    })
     userStories.push(sprint)
     count++;
+    titleStory.value = '';
+    storyDescription.value = '';
+    assignedStory.value = '';
     console.log(userStories);
+    renderSprintBacklog(userStories);
+
 }
 
 /**
@@ -144,8 +145,26 @@ function addUserStory() {
  *   - Si aucune story: afficher "Aucune story dans ce sprint"
  * - Injecter tout le HTML généré dans le conteneur
  */
-function renderSprintBacklog() {
-    // À IMPLÉMENTER
+function renderSprintBacklog(userStories) {
+    const sprintBacklog = document.getElementById('sprintBacklog');
+    userStories.forEach(story => {
+
+            sprintBacklog.innerHTML = `
+                <div class="sprint-container">
+                    <div class="sprint-header">
+                        <h3>sprint : ${story.sprintNumber}</h3>
+                        <button class="start-sprint-btn" onclick=${startSprint()}">Démarrer Sprint</button>
+                    </div>
+                    <div class="sprint-stories">
+                        <div class="story-item">
+                            <strong>${story.title}</strong>
+                            <p>${story.description}</p>
+                            <small>Assigné à : ${story.assigned}</small>
+                        </div>
+                    </div>
+                </div>`
+
+    })
 }
 
 /**
