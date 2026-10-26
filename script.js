@@ -151,9 +151,10 @@ function addUserStory() {
  */
 function renderSprintBacklog(userStories) {
     const sprintBacklog = document.getElementById('sprintBacklog');
+    sprintBacklog.innerHTML = '';
     userStories.forEach(story => {
         if (story.status == 'backlog') {
-            sprintBacklog.innerHTML = `
+            sprintBacklog.innerHTML += `
                 <div class="sprint-container">
                     <div class="sprint-header">
                         <h3>sprint : ${story.sprintNumber}</h3>
