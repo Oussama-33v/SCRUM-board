@@ -1,5 +1,31 @@
 let collaborators = [];
-let userStories = [];
+let userStories = [
+    {
+        id: 5,
+        title: 'US01',
+        description: 'as a user lkgdwrjgpgo',
+        sprintNumber: 3,
+        assigned: 'saad',
+        status: 'backlog'
+    },
+    {
+        id: 6,
+        title: 'US05',
+        description: 'description',
+        sprintNumber: 2,
+        assigned: "OUSSAMA",
+        status: 'backlog'
+    },
+    {
+        id: 1,
+        title: 'US08',
+        description: 'DO SOMTHING',
+        sprintNumber: 1,
+        assigned: 'BRAHIM',
+        status: 'backlog'
+    }
+
+];
 let boardStories = [];
 let storyIdCounter = 1;
 
